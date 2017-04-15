@@ -1,2 +1,2 @@
 # ccc-with-c
-Redoing everything but with c++
+Competitive programmin repository, including solutions from various online judges, such as DMOJ, PEG, and UVa
