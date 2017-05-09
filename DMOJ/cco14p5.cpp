@@ -8,7 +8,7 @@ typedef pair<int, int> ii;
 typedef vector<ii> vii;
 
 int ft[600010];
-int N, M, A, B, memo[2][600010], row[100010];
+int N, M, A, B, row[100010];
 bool present[100010][6];
 
 int rsq(int b) {
