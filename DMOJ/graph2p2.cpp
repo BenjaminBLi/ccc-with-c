@@ -5,15 +5,11 @@ int N, adj[1010][1010], visited[1010];
 bool cycle;
 
 void dfs(int u){
-    //cout << u << endl;
-    //for(int i = 0; i < N; i++) printf("%d, ", visited[i]); cout << endl << endl;
     visited[u] = 1;
     for(int i = 0;i < N; i++) if(adj[u][i]){
-        //cout << "visiting: " << i << endl;
         if(visited[i] == 0){
             dfs(i);
         }else if(visited[i] == 1) {
-            //cout << "entered here" << endl;
             cycle = true;
         }
     }
