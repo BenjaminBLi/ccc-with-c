@@ -8,15 +8,16 @@ vi adj[100010];
 bool contains[100010];
 vi stk;
 
-void dfs1(int u){
+void dfs1(int u, int pre){
     dfsn[u] = low[u] = ++cnt;
     stk.pb(u);
     visited[u] = true;
     for(int v : adj[u]){
+        if(v == pre) continue;
         if(!visited[v]){
-            dfs1(v);
+            dfs1(v, u);
             low[u] = min(low[u], low[v]);
-        }else if(true){
+        }else if(visited[v] == 1){
 
         }
 
