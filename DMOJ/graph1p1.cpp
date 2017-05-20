@@ -25,8 +25,10 @@ int main(){
     int cnt = 0;
     for(int i = 0;i < N; i++) {
         for (int j = 0; j < N; j++) {
+            printf("%d, ", res[i][j] > 0 ? 1 : 0);
             cnt += res[i][j];
         }
+        printf("\n");
     }
     printf("%d\n", cnt);
 
