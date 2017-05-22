@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 #define fori(i, st, en) for(int i = st; i < en; i++)
-#define rfori(i, en, st) for(int i = en; i >= st; i--)
 using namespace std;
 
 int N, M, p[210];
@@ -38,7 +37,6 @@ int main(){
                 if(memo[j]) memo[j+p[i]] = true;
             }
         }
-        //fori(i, 0, N+1) printf("%c, ", memo[i]&&prime[i] ? 'T' : 'F');
         bool ok = false;
         fori(i, tot, N+1){
             if(memo[i] && prime[i]) ok = true;
