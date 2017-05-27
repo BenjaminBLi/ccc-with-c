@@ -15,19 +15,6 @@ bool valid, shares, seen[100010], cycle4, inCycle[100010];
 vector<int> stk;
 set<ii> edges;
 
-/*
- *
-7 9
-6 5
-6 1
-3 7
-1 3
-1 7
-6 2
-2 1
-4 3
-5 4
- */
 
 void addE(int u, int v){
     //printf("<%d,%d>\n", u, v);
@@ -86,7 +73,6 @@ void dfs3(int u, int pre){
 }
 
 void dfs4(int u, int pre){
-
     visited[u] = 1;
     stk.pb(u);
     for(int v : adj[u]){
