@@ -91,7 +91,6 @@ int main(){
     cRoot = 1, cnt = 0, cIdx = 0;
     tarjans(1, -1);
     memset(visited, false, sizeof(visited));
-    //printf("%lld\n", loopLen[1][0]);
     fill(memo, memo+N+1, (1LL<<62));
     fill(memo, memo+N+1, (1LL<<62));
     memo[1] = 0;
