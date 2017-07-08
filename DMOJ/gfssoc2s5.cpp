@@ -6,12 +6,13 @@
 #define s second
 using namespace std;
 
-int N, M, scCnt = 0, cIdx = 0, gold[500010], low[500010], dfn[500010], p[500010];
-int tot[500010], memo[2][500010], cnt[2][500010];
+int N, M, scCnt = 0, cIdx = 0, gold[500010], low[500010], dfn[500010], p[500010], w;
+int tot[500010];
+ii memo[4][500010];
 int MOD = 1000000007;
 vi adj[500010];
 set<int> dag[500010];
-bool visited[500010], inStk[500010];
+bool inStk[500010];
 stack<int> scc;
 
 void tarjan(int u) {
@@ -25,16 +26,17 @@ void tarjan(int u) {
         } else if (inStk[v]) low[u] = min(low[u], dfn[v]);
     }
 
-    int w;
     if (low[u] == dfn[u]) {
         while (scc.top() != u) {
             w = scc.top();
             p[w] = scCnt;
             inStk[w] = false;
             scc.pop();
+            tot[scCnt] += gold[w];
         }
         w = scc.top();
         p[w] = scCnt;
+        tot[scCnt] += gold[w];
         inStk[w] = false;
         scc.pop();
         scCnt++;
@@ -42,29 +44,21 @@ void tarjan(int u) {
 }
 
 void compress(){
-    queue<int> q;
-    q.push(1);
-    visited[1] = true;
-    while(q.size()){
-        int u = q.front(); q.pop();
-        tot[p[u]] += gold[u];
-        for(int v : adj[u]){
-            if(!visited[v]){
-                visited[v] = true;
-                q.push(v);
-                if(p[u] != p[v]) dag[p[u]].insert(p[v]);
-            }
-        }
+    for(int i = 1; i <= N; i++){
+        for(int v : adj[i]) if(p[i] != p[v]) dag[p[i]].insert(p[v]);
+        adj[i].clear();
     }
 }
 
 ii solve(int u, bool take){
     if(u == p[N]){
-        return ii(take ? tot[u] : 0, 1);
-    }if(memo[take][u] != -1)
-        return ii(memo[take][u], cnt[take][u]);
+        if(take)
+            return ii(tot[u], 1);
+        return ii(0, 1);
+    }if(memo[take][u] != ii(-1, -1))
+        return memo[take][u];
 
-    ii ans = ii(-1000000000LL, 0), tmp;
+    ii ans = ii(-1000000000, 0), tmp;
     for(int v : dag[u]){
         if(take){
             tmp = solve(v, false);
@@ -77,27 +71,29 @@ ii solve(int u, bool take){
             }
         }
         tmp = solve(v, true);
-        if(tmp.f > ans.f) ans = tmp;
-        else if(tmp.f == ans.f) ans.s += tmp.s, ans.s %= MOD;
+        if(tmp.f > ans.f)
+            ans = tmp;
+        else if(tmp.f == ans.f) {
+            ans.s += tmp.s;
+            ans.s %= MOD;
+        }
     }
-    memo[take][u] = ans.f;
-    cnt[take][u] = ans.s;
+    memo[take][u] = ans;
     return ans;
 }
 
 int main(){
     scanf("%d %d", &N, &M);
+    for(int i = 1; i <= N; i++) memo[0][i] = memo[1][i] = ii(-1, -1);
     for(int i = 1; i <= N; i++) scanf("%d", gold+i);
+    int u, v;
     for(int i = 0; i < M; i++){
-        int u, v;
         scanf("%d %d", &u, &v);
         adj[u].push_back(v);
     }
 
     tarjan(1);
     compress();
-    memset(memo, -1, sizeof(memo));
-    memset(cnt, -1, sizeof(cnt));
 
     ii fin = solve(p[1], true);
     printf("%d %d\n", fin.f, fin.s);
