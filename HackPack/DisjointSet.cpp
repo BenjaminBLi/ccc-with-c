@@ -13,6 +13,6 @@ void us(int i, int j){
             p[x] = y;
             if(rnk[x] == rnk[y]) rnk[y]++;
         }
-        nsets++;
+        nsets--;
     }
 }
