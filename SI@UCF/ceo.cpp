@@ -2,8 +2,6 @@
 using namespace std;
 
 /*
- * insert all elements into a priority queue: active set
- *
  * comparator checks the current item when being inserted:
         player first joins
         check all intersections

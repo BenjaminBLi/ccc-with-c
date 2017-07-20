@@ -1,29 +1,8 @@
 #include "bits/stdc++.h"
 #define MAXN 1<<20
-#define INF 1e10
+#define INF 2e10
 using namespace std;
 typedef long long ll;
-/*
- * ant clans: graph theory, split n nodes into k groups of equal size....
- * similar to an MST I believe
- *
- * run bitmask dp with MST.
- * first generate all MSTs with the subsets... runtime: 2^n * N^2
- *
- * to generate subsets of a bitmask using an interesting formula:
-for(s = mask; ss; ss = (ss-1)&mask)
-
- * to generate subsets of size k in a set by optimizing
-- only count subsets with k bits on.
-- always take masks that include the first open bit
-- if you have only one mask left, just take that mask.
-
-4 4 2
-1 2 300
-2 3 200
-3 4 100
-4 1 8
- */
 
 int n, m, k, nS;
 ll adj[30][30], lookup[MAXN], val[MAXN], memo[MAXN];
@@ -74,10 +53,9 @@ void gen(){
 }
 
 ll solve(int mask) {
-    //cout << mask << endl;
-    if (__builtin_popcount(mask) == k) {
+    if (__builtin_popcount(mask) == k)
         return lookup[mask];
-    }
+
     if(memo[mask] != -1) return memo[mask];
     ll tot = INF;
     int lBit = highestOneBit(mask);
@@ -110,7 +88,6 @@ int main(){
     else {
         k = n/k;
         gen();
-        //cout << "DONE" << endl;
         ll ans = solve(nS - 1);
         if (ans >= INF) printf("-1\n");
         else printf("%lld\n", ans);
