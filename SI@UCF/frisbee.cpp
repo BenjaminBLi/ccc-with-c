@@ -58,6 +58,7 @@ void dfs(int u){
 int main(){
     scanf("%d %d", &N, &M);
     ok = true;
+    for(int i = 0; i < N; i++) adj[i].clear();
     for(int i = 0; i < M; i++){
         int u, v;
         scanf("%d %d", &u, &v);
