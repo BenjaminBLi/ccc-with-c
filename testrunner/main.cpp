@@ -1,4 +1,4 @@
-#include "../SI@UCF/g.cpp"
+#include "C:/Users/strik/CLionProjects/ccc-with-c/tasks/ioi0221.cpp"
 
 #include <iostream>
 #include <fstream>
@@ -29,7 +29,7 @@ bool check(std::string expected, std::string actual) {
 
 int main() {
 	std::vector<jhelper::Test> tests = {
-		{"4\n7 6\n1 2\n1 3\n2 4\n3 4\n4 5\n5 6\n5 4\n1 2\n2 3\n2 4\n4 5\n4 4\n1 2\n2 3\n3 4\n4 1\n8 8\n1 2\n2 3\n2 4\n2 5\n3 4\n5 6\n6 7\n6 8", "Case #1: 1\nCase #2: 10\nCase #3: 0\nCase #4: 6 ", true, true},
+		{"2\n50\n100 100\n100 100", "45000", true, true},{"5\n1\n1 3\n3 2\n4 3\n2 3\n1 4", "153", true, true},
 	};
 	bool allOK = true;
 	int testID = 0;
@@ -49,7 +49,7 @@ int main() {
 			std::stringstream in(test.input);
 			std::ostringstream out;
 			std::clock_t start = std::clock();
-			g solver;
+			ioi0221 solver;
 			solver.solve(in, out);
 			std::clock_t finish = std::clock();
 			double currentTime = double(finish - start) / CLOCKS_PER_SEC;
