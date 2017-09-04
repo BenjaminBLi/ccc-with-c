@@ -13,38 +13,51 @@ typedef pair<int, int> ii;
 typedef long long ll;
 typedef vector<ii> vii;
 
-int N, dist[2010][2010], memo[2010][2010];
+struct e{
+    int u, v, w;
+    e(){}
+    e(int a, int b, int c){u = a, v = b, w = c;}
+    bool operator < (const e& o)const{
+        return w < o.w;
+    }
+    bool operator > (const e& o) const{
+        return w > o.w;
+    }
+};
+
+int N, memo[2010], tmp[2010], dist[2010];
 ii coords[2010];
+
+vector<e> es;
 
 int sDist(ii a, ii b){
     return (a.f-b.f)*(a.f-b.f) + (a.s-b.s)*(a.s-b.s);
 }
-
-int solve(int cdist, int curr){
-    int best = 0;
-    fori(i, 0, N){
-        if(curr == i) continue;
-        if(dist[curr][i] < cdist){
-            int c = 1 + solve(dist[i][curr], i);
-            if(c > best){
-                best = c;
-            }
-        }
-    }
-    return best;
+bool comp(e a, e b){
+    return a < b;
 }
 
-int main(){
-    scan(N);
-    fori(i, 0, N){
-        int x, y;
-        scan(x); scan(y);
-        coords[i] = ii(x, y);
+int main() {
+    scanf("%d", &N);
+    fori(i, 0, N) scanf("%d %d", &coords[i].f, &coords[i].s);
+
+    fori(i, 0, N) fori(j, i+1, N) {
+            es.pb(e(i, j, sDist(coords[i], coords[j])));
+        }
+    fori(i, 0, N) es.pb(e(N, i, sDist(coords[i], ii(0, 0))));
+    sort(es.begin(), es.end(), comp);
+    int sz = es.size();
+    fori(i, 0, sz){
+        e c = es[i];
+        if(c.w > dist[c.u]) dist[c.u] = c.w, tmp[c.u] = memo[c.u];
+        if(c.w > dist[c.v]) dist[c.v] = c.w, tmp[c.v] = memo[c.v];
+        if(c.u == N) memo[N] = max(memo[N], tmp[c.v]+1);
+        else{
+            memo[c.u] = max(memo[c.u], tmp[c.v]+1);
+            memo[c.v] = max(memo[c.v], tmp[c.u]+1);
+        }
     }
-    coords[N] = ii(0, 0);
-    N++;
-    fori(i, 0, N) fori(j, 0, N) dist[i][j] = dist[j][i] = sDist(coords[i], coords[j]);
-    cout << solve(0x3f3f3f, N-1) << endl;
+    printf("%d\n", memo[N]);
 
     return 0;
 }

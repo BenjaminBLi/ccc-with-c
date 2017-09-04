@@ -1,10 +1,16 @@
 #include <bits/stdc++.h>
-#define pb push_back
+#define fori(i, st, en) for(int i = st; i < en; i++)
+#define rfori(i, st, en) for(int i = st; i >= en; i--)
 #define f first
 #define s second
+#define pb push_back
+#define scan(x) do{while((x=getchar())<'0'); for(x-='0'; '0'<=(_=getchar()); x=(x<<3)+(x<<1)+_-'0');}while(0)
+char _;
 using namespace std;
+typedef unsigned long long ull;
 typedef vector<int> vi;
 typedef pair<int, int> ii;
+typedef long long ll;
 typedef vector<ii> vii;
 
 int ft[600010];
@@ -21,10 +27,8 @@ int rsq(int a, int b) {
     return rsq(b) - (a == 1 ? 0 : rsq(a - 1));
 }
 
-void adjust(int k, int v) {
-    //cout << "adjusting: " << k <<  ", " << v << endl;
+void upd(int k, int v) {
     for (; k < N; k += (k&(-k))) {
-        //cout << k << endl;
         ft[k] += v;
     }
 }
@@ -37,7 +41,7 @@ int main(){
     scanf("%d %d %d %d", &N, &M, &A, &B);
     vii ppl;
     for(int i = 1; i <= N; i++) {
-        adjust(i, 2);
+        upd(i, 2);
     }
     for(int i = 0; i < M; i++){
         int r; char c;
@@ -49,7 +53,7 @@ int main(){
         int b = rsq(r+1, N)+curr;
         printf("%d %d\n", frst, b);
         ppl.pb(ii(frst, b));
-        if(c == 'D' || c == 'C') adjust(r, -1);
+        if(c == 'D' || c == 'C') upd(r, -1);
     }
     sort(ppl.begin(), ppl.end(), comp);
 
