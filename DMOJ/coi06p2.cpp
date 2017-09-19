@@ -13,7 +13,7 @@ typedef pair<int, int> ii;
 typedef long long ll;
 typedef vector<ii> vii;
 
-int N, E, cIdx = 0, Q, low[100010], dfn[100010], en[100010], lca[19][100010], dep[100010], p[100010];
+int n, E, cIdx = 0, Q, low[100010], dfn[100010], en[100010], lca[19][100010], dep[100010], p[100010];
 map<int, ii> id;
 vi adj[100010];
 bool vis[500010];
@@ -31,13 +31,8 @@ void dfs(int u){
         vis[e] = true;
         if(dfn[v] == 0){
             p[v] = u;
+            lca[0][v] = u;
             dep[v] = dep[u]+1;
-            lca[0][v]=v;
-            for(int j = 1; j < 19; j++){
-                if(lca[j-1][v] != -1)
-                    lca[j][v] = lca[j-1][lca[j-1][v]];
-                else break;
-            }
             dfs(v);
             if(low[u] > low[v]) low[u] = low[v];
         }else if(low[u] > dfn[v]) low[u] = dfn[v];
@@ -47,44 +42,69 @@ void dfs(int u){
 
 bool inTree(int &u, int &v){return dfn[u] >= dfn[v] && en[u] <= en[v];}
 
-int search(int x, int y){
-    if(dep[x] < dep[y]) swap(x, y);
-    for(int i = 18; i >= 0; i--)
-        if(dep[x] >= dep[y] + (1<<i)) x = lca[i][x];
-    if (x== y) return y;
-    for(int i = 18; i >= 0; i--)
-        if(lca[i][x] != -1 && lca[i][x] != lca[i][y])
-            x = lca[i][x], y = lca[i][y];
-    return lca[0][x];
+void genTable() {
+    fori(i, 1, 19)
+        fori(u, 1, n + 1)
+            lca[i][u] = lca[i - 1][lca[i - 1][u]];
 }
 
-int main(){
+int getp(int u, int dst) {
+    int cv = u, i = 17;
+    while(dst){
+        if(dst >= (1<<i)){
+            cv = lca[i][cv];
+            dst -= (1<<i);
+        }else i--;
+    }
+    return cv;
+}
+
+int main() {
     memset(lca, -1, sizeof(lca));
-    scanf("%d %d", &N, &E);
-    fori(i, 0, E){
+    scanf("%d %d", &n, &E);
+    fori(i, 0, E) {
         int u, v;
         scanf("%d %d", &u, &v);
         adj[u].pb(i), adj[v].pb(i);
         id[i] = ii(u, v);
     }
-    dep[1] = 0;
-    dfs(1);
+    fori(i, 1, n+1){
+        if(dfn[i] == 0){
+            dep[i] = 0;
+            dfs(i);
+        }
+    }
+    genTable();
+
     scanf("%d", &Q);
     int t, a, b, u, v, c;
     bool ia, ib;
-    fori(q, 0, Q){
+    fori(q, 0, Q) {
         scanf("%d", &t);
-        if(t == 1){
+        if (t == 1) {
             scanf("%d %d %d %d", &a, &b, &u, &v);
-            if(dfn[u] > dfn[v]) swap(u, v);
+            if (dfn[u] > dfn[v]) swap(u, v);
             ia = inTree(a, v), ib = inTree(b, v);
-            if(low[v] <= dfn[u] || ia == ib) printf("yes\n");
+            if (low[v] <= dfn[u] || ia == ib) printf("yes\n");
             else printf("no\n");
-        }else{
+        } else {
             scanf("%d %d %d", &a, &b, &c);
-            printf("no\n");
+            ia = inTree(a, c), ib = inTree(b, c);
+            if (!ia && !ib) printf("yes\n");
+            else if (ia && ib) {
+                int d = getp(a, dep[a] - dep[c] - 1), e = getp(b, dep[b] - dep[c] - 1);
+                if (d == e || (low[d] < dfn[c] && low[e] < dfn[c])) printf("yes\n");
+                else printf("no\n");
+            } else if (ia) {
+                int d = getp(a, dep[a] - dep[c] - 1);
+                if (low[d] < dfn[c]) printf("yes\n");
+                else printf("no\n");
+            } else {
+                int d = getp(b, dep[b] - dep[c] - 1);
+                if (low[d] < dfn[c]) printf("yes\n");
+                else printf("no\n");
+            }
         }
     }
-
     return 0;
 }

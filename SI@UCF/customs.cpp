@@ -11,28 +11,6 @@ vector<int> vs;
 map<int, ii> id;
 bool ok, vis[100010];
 
-/*
-14 18
-2 3
-1 3
-1 5
-1 6
-6 4
-1 4
-1 8
-8 7
-10 9
-6 10
-5 7
-9 6
-2 11
-1 11
-12 13
-14 13
-12 14
-12 1
- */
-
 void markEs(int rE){
     if(!stk[0]) return;
     vi curr;

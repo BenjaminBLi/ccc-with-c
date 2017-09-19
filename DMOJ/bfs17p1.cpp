@@ -4,20 +4,23 @@
 #define f first
 #define s second
 #define pb push_back
-#define scan(x) do{while((x=getchar())<'0'); for(x-='0'; '0'<=(_=getchar()); x=(x<<3)+(x<<1)+_-'0');}while(0)
-char _;
 using namespace std;
-typedef unsigned long long ull;
-typedef vector<int> vi;
-typedef pair<int, int> ii;
 typedef long long ll;
+typedef pair<int, int> ii;
+typedef vector<int> vi;
 typedef vector<ii> vii;
 
-int n, C;
+int N;
+string tmp;
 
 int main(){
-    scanf("%d %d", &n, &C);
-
-
+    cin >> N;
+    int cnt = 0;
+    fori(i, 0, N){
+        cin >> tmp;
+        if(tmp.size() > 10) continue;
+        cnt++;
+    }
+    cout << cnt << "\n";
     return 0;
 }

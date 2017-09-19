@@ -14,7 +14,7 @@ typedef long long ll;
 typedef vector<ii> vii;
 
 int ft[600010];
-int N, M, A, B, row[100010];
+int n, M, A, B, row[100010];
 bool present[100010][6];
 
 int rsq(int b) {
@@ -28,7 +28,7 @@ int rsq(int a, int b) {
 }
 
 void upd(int k, int v) {
-    for (; k < N; k += (k&(-k))) {
+    for (; k < n; k += (k&(-k))) {
         ft[k] += v;
     }
 }
@@ -38,9 +38,9 @@ bool comp(ii a, ii b){
 }
 
 int main(){
-    scanf("%d %d %d %d", &N, &M, &A, &B);
+    scanf("%d %d %d %d", &n, &M, &A, &B);
     vii ppl;
-    for(int i = 1; i <= N; i++) {
+    for(int i = 1; i <= n; i++) {
         upd(i, 2);
     }
     for(int i = 0; i < M; i++){
@@ -50,7 +50,7 @@ int main(){
         if(c == 'A') curr += present[r][1] + present[r][2];
         if(c == 'B') curr += present[r][2];
         int frst = rsq(r-1)+curr;
-        int b = rsq(r+1, N)+curr;
+        int b = rsq(r+1, n)+curr;
         printf("%d %d\n", frst, b);
         ppl.pb(ii(frst, b));
         if(c == 'D' || c == 'C') upd(r, -1);

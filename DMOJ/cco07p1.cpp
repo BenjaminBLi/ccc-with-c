@@ -12,7 +12,7 @@ typedef pair<int, int> ii;
 typedef vector<ii> vii;
 
 int n, sz;
-ii pts[10010], piv;
+ii npts[10010], piv;
 vii stk;
 
 int ccw(ii p1, ii p2, ii p3) {
@@ -36,31 +36,31 @@ void scan() {
     if (n < 3) return;
     int ly = 0;
     fori(i, 1, n) {
-        if (pts[i].s < pts[ly].s) ly = i;
-        else if (pts[i].s == pts[ly].s && pts[i].f < pts[ly].f) ly = i;
+        if (npts[i].s < npts[ly].s) ly = i;
+        else if (npts[i].s == npts[ly].s && npts[i].f < npts[ly].f) ly = i;
     }
-    if(ly != 0) swap(pts[0], pts[ly]);
-    piv = pts[0];
-    sort(pts + 1, pts + n, comp);
-    fori(i, 0, 3) stk.pb(pts[i]);
+    if(ly != 0) swap(npts[0], npts[ly]);
+    piv = npts[0];
+    sort(npts + 1, npts + n, comp);
+    fori(i, 0, 3) stk.pb(npts[i]);
 
     ii u;
     fori(i, 3, n){
         u = stk.back();
         stk.pop_back();
-        while(ccw(stk.back(), u, pts[i]) != -1){
+        while(ccw(stk.back(), u, npts[i]) != -1){
             u = stk.back();
             stk.pop_back();
         }
         stk.pb(u);
-        stk.pb(pts[i]);
+        stk.pb(npts[i]);
     }
 }
 
 
 int main() {
     scanf("%d", &n);
-    fori(i, 0, n) scanf("%d %d", &pts[i].f, &pts[i].s);
+    fori(i, 0, n) scanf("%d %d", &npts[i].f, &npts[i].s);
     scan();
     stk.pb(stk[0]);
     int area = 0;

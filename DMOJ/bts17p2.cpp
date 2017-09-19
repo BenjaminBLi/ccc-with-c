@@ -4,20 +4,22 @@
 #define f first
 #define s second
 #define pb push_back
-#define scan(x) do{while((x=getchar())<'0'); for(x-='0'; '0'<=(_=getchar()); x=(x<<3)+(x<<1)+_-'0');}while(0)
-char _;
 using namespace std;
-typedef unsigned long long ull;
-typedef vector<int> vi;
-typedef pair<int, int> ii;
 typedef long long ll;
+typedef pair<int, int> ii;
+typedef vector<int> vi;
 typedef vector<ii> vii;
 
-int n, C;
+int G, e, t;
 
 int main(){
-    scanf("%d %d", &n, &C);
-
-
+    double ans = 1.0;
+    scanf("%d", &G);
+    fori(a, 0, G){
+        scanf("%d %d", &e, &t);
+        e = t-e;
+        ans *= 1.0*e/t;
+    }
+    printf("%.6lf", ans);
     return 0;
 }

@@ -13,7 +13,7 @@ typedef pair<int, int> ii;
 typedef long long ll;
 typedef vector<ii> vii;
 
-int N, lca[10][1010], dep[1010], p[1010];
+int n, lca[10][1010], dep[1010], p[1010];
 vi adj[1010];
 bool vis[1010];
 
@@ -28,8 +28,8 @@ int search(int x, int y) {
     return lca[0][x];
 }
 void reset() {
-    fori(j, 0, 10) fori(i, 1, N + 1) lca[j][i] = -1;
-    fori(i, 1, N + 1) adj[i].clear(), vis[i] = false;
+    fori(j, 0, 10) fori(i, 1, n + 1) lca[j][i] = -1;
+    fori(i, 1, n + 1) adj[i].clear(), vis[i] = false;
 }
 void root() {
     queue<int> q;
@@ -62,10 +62,10 @@ int main() {
     int T;
     scanf("%d", &T);
     fori(t, 1, T+1) {
-        scanf("%d", &N);
+        scanf("%d", &n);
         printf("Case %d:\n", t);
         reset();
-        fori(i, 0, N) {
+        fori(i, 0, n) {
             int M;
             scanf("%d", &M);
             fori(j, 0, M) {

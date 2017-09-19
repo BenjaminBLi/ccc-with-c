@@ -12,7 +12,7 @@ typedef vector<int> vi;
 typedef long long ll;
 typedef pair<ll, ll> ii;
 typedef vector<ii> vii;
-int N;
+int n;
 ll memo[2010][2010][2];
 ii h[2010];
 bool taken[2010];
@@ -29,13 +29,13 @@ ll solve(int l, int r, int en){
 }
 
 int main(){
-	scanf("%d", &N);
-	for(int i =0;i < N; i++)
+	scanf("%d", &n);
+	for(int i =0;i < n; i++)
 		scanf("%lld %lld", &h[i].first, &h[i].second);
 
-	sort(h, h+N);
+	sort(h, h+n);
 	int st = 0;
-	for(int i =0; i < N; i++) if(h[i].first == 0) {st = i; break;}
+	for(int i =0; i < n; i++) if(h[i].first == 0) {st = i; break;}
 	printf("%lld\n", max(solve(st, st, 0), solve(st, st, 1)));
 	return 0;
 }

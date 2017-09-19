@@ -16,22 +16,24 @@ int N, low[MAXN], dfn[MAXN], cIdx = 0, cRoot, cnt, hi, stk[MAXN];
 ull exits, ways;
 vi adj[MAXN];
 map<int, ii> id;
-vector<set<int>> edgeSets;
-vi vs;
 bool vis[510], isArt[MAXN];
 
 void markEs(int rE) {
     if (!stk[0]) return;
-    cnt++;
+    int aCnt = 0;
     set<int> cv;
     while (true){
         int c = stk[stk[0]--];
+        if(cv.count(id[c].f) == 0 && isArt[id[c].f]) aCnt++;
         cv.insert(id[c].first);
+        if(cv.count(id[c].s) == 0 && isArt[id[c].s]) aCnt++;
         cv.insert(id[c].second);
         if (stk[0] == 0 || rE == c) break;
     }
-    edgeSets.push_back(cv);
-    vs.push_back(cv.size());
+    if(aCnt <= 1){
+        exits++;
+        ways *= (ull) (cv.size()-aCnt);
+    }
 }
 
 int findO(int u, ii e){
@@ -59,22 +61,9 @@ void dfs(int u) {
     }
 }
 
-void root() {
-    fori(i, 0, cnt){
-        set<int> st = edgeSets[i];
-        int aCnt = 0;
-        for(int v : st) if(isArt[v]) aCnt++;
-        if(aCnt > 1) continue;
-        //cout << "YES" << endl;
-        exits++;
-        ways *= (ull) (vs[i]-aCnt);
-    }
-}
 
 void reset(){
     id.clear();
-    edgeSets.clear();
-    vs.clear();
 
     fori(i, 0, 510){
         vis[i] = false;
@@ -85,7 +74,6 @@ void reset(){
         adj[i].clear();
     }
     stk[0] = 0;
-    cnt = 0;
     hi = 0;
     exits = 0, ways = 1;
 }
@@ -111,9 +99,7 @@ int main(){
                 dfs(i);
                 if(stk[0]) markEs(-1);
             }
-        root();
         if(exits == 1) exits = 2, ways = choose(ways);
-        //fori(i, 0, hi) printf("%c, ", isArt[i] ? 'T' : 'F');
         printf("%lld %lld\n", exits, ways);
         scanf("%d", &N);
     }

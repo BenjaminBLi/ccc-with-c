@@ -31,7 +31,7 @@ void update(int vIdx, int idx, int val){
 }
 
 void build(){
-    for(int i = 1; i < N; i++) update(i)
+    for(int i = 1; i < N; i++) update(i);
 }
 
 void rUpdate(int vIdx, int st, int en, int l, int r, int val){
