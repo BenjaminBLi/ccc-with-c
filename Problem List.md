@@ -6,7 +6,8 @@ Below are categories of problems that I've encountered and some sample solutions
 * [Signal Hill](https://dmoj.ca/problem/DMPG15S4): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/DMPG15S4.cpp)
 * [King Graff's Trop](http://wcipeg.com/problem/grafftrip): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/GraffTrip.cpp)
 * [King Gruff](http://wcipeg.com/problem/ccc14s2p2): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/KingGruff.cpp)
-* 
+
+
 ### Diameter, Radius, and Centers of a Tree
 * [Save Nagato!](https://dmoj.ca/problem/dmopc14c4p6): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/SaveNagato.cpp)
 * [Patrol](https://dmoj.ca/problem/apio10p2): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/apio10p2.cpp)
@@ -31,8 +32,8 @@ Below are categories of problems that I've encountered and some sample solutions
 ### Binary Search
 * [Great Sequence](https://dmoj.ca/problem/dmopc15c4p4):[Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/GreatSequence.cpp)
 * [Royal Guard](https://dmoj.ca/problem/mockccc15j5): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/RoyalGuard.cpp)
-* 
+
 
 ## Greedy
 * [Largest Permutation](https://dmoj.ca/problem/largeperm): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/LargestPermutation.cpp)
-* 
+
