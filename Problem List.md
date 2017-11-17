@@ -4,7 +4,14 @@ Below are categories of problems that I've encountered and some sample solutions
 ## Graph Theory
 ### DFS and BFS
 * [Signal Hill](https://dmoj.ca/problem/DMPG15S4): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/DMPG15S4.cpp)
-* [King Graff's Trop](http://wcipeg.com/problem/grafftrip): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/GraffTrip.cpp)
+* [Basketball Dodgeball](https://dmoj.ca/problem/bfs17p3): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/bfs17p3.cpp)
+* [Pair Programming](https://dmoj.ca/problem/bfs17p4): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/bfs17p4.cpp)
+
+## Dijkstra's Algorithm
+* [King Graff's Trip](http://wcipeg.com/problem/grafftrip): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/GraffTrip.cpp)
+* [King Gruff](http://wcipeg.com/problem/ccc14s2p2): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/KingGruff.cpp)
+
+## Binary Search on a Graph
 * [King Gruff](http://wcipeg.com/problem/ccc14s2p2): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/KingGruff.cpp)
 
 
@@ -36,4 +43,12 @@ Below are categories of problems that I've encountered and some sample solutions
 
 ## Greedy
 * [Largest Permutation](https://dmoj.ca/problem/largeperm): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/LargestPermutation.cpp)
+* [Crayola Lightsaber](https://dmoj.ca/problem/bfs17p2): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/bfs17p2.cpp)
+* 
+
+## Strings
+### Simple Ad Hoc
+* [Pithy Passtimes](https://dmoj.ca/problem/bfs17p1): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/bfs17p1.cpp)
+* 
+
 
