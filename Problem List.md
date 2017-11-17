@@ -79,7 +79,7 @@ Below are categories of problems that I've encountered and some sample solutions
 * [Sheep and Coyotes](https://dmoj.ca/problem/ccc00s5): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/ccc00s5.cpp)
 * [Cookies](https://dmoj.ca/problem/ccc01s4): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/ccc01s4.cpp)
 
-### idk ben you name this category
+### Sequences and Series
 * [Fibonacci Sequence](https://dmoj.ca/problem/fibonacci): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/fibonacci.cpp)
 
 ## Ad Hoc
