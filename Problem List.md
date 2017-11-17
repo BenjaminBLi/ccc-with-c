@@ -8,12 +8,12 @@ Below are categories of problems that I've encountered and some sample solutions
 * [Pair Programming](https://dmoj.ca/problem/bfs17p4): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/bfs17p4.cpp)
 * [Strategic Bombing](https://dmoj.ca/problem/ccc01s3): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/ccc01s3.cpp)
 
-## Dijkstra's Algorithm
+### Dijkstra's Algorithm
 * [King Graff's Trip](http://wcipeg.com/problem/grafftrip): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/GraffTrip.cpp)
 * [King Gruff](http://wcipeg.com/problem/ccc14s2p2): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/KingGruff.cpp)
 * [Jakarta Skyscrapers](https://dmoj.ca/problem/apio15p2): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/apio15p2.cpp)
 
-## Binary Search on a Graph
+### Binary Search on a Graph
 * [King Gruff](http://wcipeg.com/problem/ccc14s2p2): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/KingGruff.cpp)
 
 ### Diameter, Radius, and Centers of a Tree
