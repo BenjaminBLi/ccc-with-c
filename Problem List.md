@@ -79,8 +79,13 @@ Below are categories of problems that I've encountered and some sample solutions
 * [Sheep and Coyotes](https://dmoj.ca/problem/ccc00s5): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/ccc00s5.cpp)
 * [Cookies](https://dmoj.ca/problem/ccc01s4): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/ccc01s4.cpp)
 
+### idk ben you name this category
+* [Fibonacci Sequence](https://dmoj.ca/problem/fibonacci): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/fibonacci.cpp)
+
 ## Ad Hoc
 ### Implementation
 * [0123456789](https://dmoj.ca/problem/ccco2j1): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/ccc02j1.cpp)
 
 
+### Data Compression
+* [Fast Factorial Calculator 2](https://dmoj.ca/problem/factorial2): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/factorial2.cpp)
