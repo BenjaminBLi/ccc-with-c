@@ -1,103 +1,110 @@
 #include <bits/stdc++.h>
-#define fori(i, st, en) for(int i = st; i < en; i++)
-#define rfori(i, st, en) for(int i = st; i >= en; i--)
+#define fori(i, st, en) for(int i = st; i < (int) en; i++)
+#define rfori(i, st, en) for(int i = st; i >= (int) en; i--)
 #define f first
 #define s second
 #define pb push_back
-#define INF 0x3f3f3f3f
-#define MAXN 100010
+#define left(idx) (idx<<1)
+#define right(idx) (idx<<1|1)
+#define mid(l, r) ((l+r)>>1)
 using namespace std;
-typedef unsigned long long ull;
+typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int, int> ii;
 typedef long long ll;
 typedef vector<ii> vii;
 
-int n, qrs, a[MAXN], m[2*MAXN], g[2*MAXN], q[2*MAXN];
+const int MAXN = 100010, inf = 0x3f3f3f3f;
+
+struct node{
+	int l, r;
+	int mn, gcd, cnt;
+	node(){mn = 0, cnt = gcd = 1;}
+}tree[MAXN<<2];
+
+int n, m, orig[MAXN];
 
 int gcd(int a, int b){
-	while(a && b) a > b ? a %= b : b %= a;
-	return a|b;
+	if(b == 0) return a;
+	return gcd(b, a%b);
 }
 
-void build(){
-	rfori(i, n-1, 1){
-		m[i] = min(m[i<<1], m[i<<1|1]);
-		g[i] = gcd(g[i<<1], g[i<<1|1]);
-		q[i] = (g[i] == g[i<<1] ? q[i<<1] : 0) + (g[i] == g[i<<1|1] ? q[i<<1|1] : 0); 
-	}
-} 
-
-void upd(int idx, int val){
-	for(idx += n, m[idx] = val, g[idx] = val; idx; idx >>= 1){
-		m[idx>>1] = min(m[idx], m[idx^1]);
-		g[idx>>1] = gcd(g[idx], g[idx^1]);
-		q[idx>>1] = (g[idx>>1] == g[idx] ? q[idx] : 0) + (g[idx>>1] == g[idx^1] ? q[idx^1] : 0);
-	}
+void calc(int idx){
+	tree[idx].gcd = gcd(tree[left(idx)].gcd, tree[right(idx)].gcd);
+	tree[idx].mn = min(tree[left(idx)].mn, tree[right(idx)].mn);
+	tree[idx].cnt = 0;
+	if(tree[idx].gcd == tree[left(idx)].gcd) tree[idx].cnt += tree[left(idx)].cnt;
+	if(tree[idx].gcd == tree[right(idx)].gcd) tree[idx].cnt += tree[right(idx)].cnt;
 }
 
-int qrMin(int l, int r){
-	int ret = INF;
-	for(l += n, r += n; l < r; l >>= 1, r >>= 1){
-		if(l&1) ret = min(ret, m[l++]);
-		if(r&1) ret = min(ret, m[--r]);
-	}
-	return ret;
+void apply(int idx, int val){
+	tree[idx].mn = tree[idx].gcd = val; 
+	tree[idx].cnt = 1;
 }
 
-int qrG(int l, int r){
+void build(int l, int r, int idx = 1){
+	tree[idx].l = l, tree[idx].r = r;
+	if(l == r) {
+		apply(idx, orig[l]);
+		return;
+	}
+	build(l, mid(l, r), left(idx)), build(mid(l, r)+1, r, right(idx));
+	calc(idx);
+}
+
+void upd(int p, int val, int idx = 1){
+	if(tree[idx].l == tree[idx].r){
+		apply(idx, val);
+		return;
+	} 
+
+	if(tree[idx].l <= p && p <= mid(tree[idx].l, tree[idx].r)) {
+		upd(p, val, left(idx));
+	}else {
+		upd(p, val, right(idx));
+	}
+	calc(idx);
+}
+
+int qryMin(int l, int r, int idx = 1){
+	if(l <= tree[idx].l && tree[idx].r <= r) return tree[idx].mn;
+	if(tree[idx].l > r || l > tree[idx].r) return inf;
+	return min(qryMin(l, r, left(idx)), qryMin(l, r, right(idx)));
+}
+
+int qryGcd(int l, int r, int idx = 1){
+	if(l <= tree[idx].l && tree[idx].r <= r) return tree[idx].gcd;
+	if(tree[idx].l > r || l > tree[idx].r) return 0;
+	return gcd(qryGcd(l, r, left(idx)), qryGcd(l, r, right(idx)));
+}
+
+
+int qryCnt(int l, int r, int idx = 1){
+	if(l <= tree[idx].l && tree[idx].r <= r) return tree[idx].cnt;
+	if(tree[idx].l > r || l > tree[idx].r) return 0;
+	int lGcd = qryGcd(l, r, left(idx)), rGcd = qryGcd(l, r, right(idx));
+	int allGcd = gcd(lGcd, rGcd);
 	int ret = 0;
-	for(l += n, r += n; l < r; l >>= 1, r >>= 1){
-		if(l&1) ret = gcd(ret, g[l++]);
-		if(r&1) ret = gcd(ret, g[--r]);
-	}
-	return ret;
-}
-
-int qrQ(int l, int r){
-	int ql = 0, qr = 0, gr = 0, gl = 0;
-	for(l += n, r += n; l < r; l >>= 1, r >>= 1){
-		if(l&1){
-			if(gl != gcd(gl, g[l])){
-				gl = gcd(gl, g[l]);
-				ql = 0;
-			}if(gl == g[l]){
-				ql += q[l];
-			}
-			l++;
-		}if(r&1){
-			r--;
-			if(gr != gcd(gr, g[r])){
-				gr = gcd(gr, g[r]);
-				qr = 0;
-			}if(gr == g[r]){
-				qr += q[r];
-			}
-		}
-	}
-	int gfin = gcd(gr, gl);
-	int ret = 0;
-	if(gr == gfin) ret += qr;
-	if(gl == gfin) ret += ql;
+	if(allGcd == lGcd) ret += qryCnt(l, r, left(idx));
+	if(allGcd == rGcd) ret += qryCnt(l, r, right(idx));
 	return ret;
 }
 
 int main(){
-	scanf("%d%d", &n, &qrs);
-	fori(i, 0, n){
-		scanf("%d", m+i+n);
-		g[i+n] = m[i+n];
-		q[i+n] = 1;
-	}
-	build();
+	scanf("%d%d", &n, &m);
+	fori(i, 1, n+1) scanf("%d", orig+i);
+	build(1, n);
+
 	char ch;
 	int a, b;
-	fori(q, 0, qrs){
+
+	for(;m--;){
 		scanf(" %c%d%d", &ch, &a, &b);
-		if(ch == 'C') upd(a-1, b);
-		else if(ch == 'M') printf("%d\n", qrMin(a-1, b));
-		else if(ch == 'G') printf("%d\n", qrG(a-1, b));
-		else printf("%d\n", qrQ(a-1, b));
+		if(ch == 'C') upd(a, b);
+		else if(ch == 'M') printf("%d\n", qryMin(a, b));
+		else if(ch == 'G') printf("%d\n", qryGcd(a, b));
+		else printf("%d\n", qryCnt(a, b));
 	}
 	return 0;
 }
+
