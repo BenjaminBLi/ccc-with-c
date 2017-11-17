@@ -43,7 +43,7 @@ Below are categories of problems that I've encountered and some sample solutions
 * [Switch](https://dmoj.ca/problem/ccc11s5): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/ccc11s5.cpp)
 
 ## Data Structures
-### Segment Tre
+### Segment Tree
 * [Textbooks](https://dmoj.ca/problem/bts16p8):[Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/bts16p8.cpp)
 
 ### Fenwick Trees/Binary Indexed Trees (BIT)
