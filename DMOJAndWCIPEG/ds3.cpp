@@ -24,12 +24,12 @@ struct node{
 
 int n, m, orig[MAXN];
 
-int gcd(int a, int b){
+inline int gcd(int a, int b){
 	if(b == 0) return a;
 	return gcd(b, a%b);
 }
 
-void calc(int idx){
+inline void calc(int idx){
 	tree[idx].gcd = gcd(tree[left(idx)].gcd, tree[right(idx)].gcd);
 	tree[idx].mn = min(tree[left(idx)].mn, tree[right(idx)].mn);
 	tree[idx].cnt = 0;
@@ -37,7 +37,7 @@ void calc(int idx){
 	if(tree[idx].gcd == tree[right(idx)].gcd) tree[idx].cnt += tree[right(idx)].cnt;
 }
 
-void apply(int idx, int val){
+inline void apply(int idx, int val){
 	tree[idx].mn = tree[idx].gcd = val; 
 	tree[idx].cnt = 1;
 }
