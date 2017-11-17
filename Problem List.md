@@ -34,6 +34,11 @@ Below are categories of problems that I've encountered and some sample solutions
 * [Nightmare-a-thon](https://dmoj.ca/problem/gfssoc2j5): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/Nightmare-a-thon.cpp)
 * [Bali Sculpturs](https://dmoj.ca/problem/apio15p1): [Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/apio15p1.cpp)
 
+## Data Structures
+### Segment Tre
+* [Textbooks](https://dmoj.ca/problem/bts16p8):[Solution](https://github.com/BenjaminBLi/ccc-with-c/blob/master/DMOJAndWCIPEG/bts16p8.cpp)
+* 
+
 
 ## Searching
 ### Binary Search
