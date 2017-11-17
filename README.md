@@ -10,3 +10,5 @@ If the problem does not exist, then the problem is either taken from the WCIPEG 
 |DMOJ           |[BenjaminBLi](https://dmoj.ca/user/BenjaminBLi)|
 |WCIPEG         |[BenLi](http://wcipeg.com/user/BenLi)|
 |UVa            |[UHunt](http://uhunt.felix-halim.net/id/778334)|
+
+See the [Problem List](https://github.com/BenjaminBLi/ccc-with-c/blob/master/Problem%20List.md) for a list of problems separated by category.
