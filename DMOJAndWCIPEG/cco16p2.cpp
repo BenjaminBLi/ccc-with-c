@@ -1,109 +1,57 @@
 #include <bits/stdc++.h>
-#define fori(i, st, en) for(int i = st; i < en; i++)
-#define rfori(i, st, en) for(int i = st; i >= en; i--)
+#define fori(i, st, en) for(int i = st; i < (int) en; i++)
+#define rfori(i, st, en) for(int i = st; i >= (int) en; i--)
 #define f first
 #define s second
 #define pb push_back
-#define scan(x) do{while((x=getchar())<'0'); for(x-='0'; '0'<=(_=getchar()); x=(x<<3)+(x<<1)+_-'0');}while(0)
-char _;
 using namespace std;
-typedef unsigned long long ull;
+typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int, int> ii;
 typedef long long ll;
 typedef vector<ii> vii;
 
-struct pt{
-    double m;
-    int x, y, w;
-    pt(){};
-    pt(int a, int b, int c){ x = a, y = b, w = c;}
-    bool operator < (const pt &o) const{
-        if(fabs(m-o.m) < 1e-9){
-            if(x == o.x) return y < o.y;
-            return x < o.x;
-        }
-        return m < o.m;
-    }
-} npts[4010], pts[4010];
-struct spt{
-    int wt = 0, wb = 0, w = 0, acnt = 0, bcnt = 0;
-};
+const double eps = 1e-6;
+const int MAXN = 4000;
 
-int n, yz, x0, bsum, fsum;
-vector<spt> vpt;
-spt c;
+int n, w[MAXN], ans;
+ii pts[MAXN];
+vector<pair<double, int>> sweep, compressed;
 
-void inc(pt a){
-    if(a.y > yz) {
-        fsum += a.w;
-        c.wt += a.w;
-        c.acnt++;
-    }
-    else {
-        bsum += a.w;
-        c.wb += a.w;
-        c.bcnt++;
-    }
-    c.w += a.w;
+int main(){
+	scanf("%d", &n);
+	fori(i, 0, n) scanf("%d%d%d", &pts[i].f,&pts[i].s, w+i);
+
+	ans = 0;
+	fori(i, 0, n){
+		sweep.clear();
+		compressed.clear();
+
+		fori(j, 0, n){
+			if(i == j) continue;
+			double ang = atan2(pts[j].s - pts[i].s, pts[j].f - pts[i].f);
+			sweep.pb({ang, w[j]});
+			sweep.pb({ang + 2 * M_PI, w[j]});
+		}
+		sort(sweep.begin(), sweep.end());
+	
+		fori(j, 0, sweep.size()){
+			int val = sweep[j].s;
+			while(j+1 < (int) sweep.size() && fabs(sweep[j].f - sweep[j + 1].f) <= eps) val += sweep[++j].s;
+			compressed.pb({sweep[j].f, val});
+		}	
+		//sort(compressed.begin(), compressed.end());
+
+		int cans = max(0, w[i]);
+		for(int a = 0, b = 0; compressed[a].f < M_PI; a++){
+			while(compressed[b].f - compressed[a].f <= M_PI) cans += compressed[b++].s;
+			ans = max(ans, cans);
+			cans -= compressed[a].s; 
+		}
+	}
+
+	printf("%d\n", ans);
+	
+	return 0;
 }
 
-void getslope(int piv) {
-    yz = npts[piv].y, x0 = npts[piv].x;
-    vpt.clear();
-    int cnt = 0;
-    fori(i, 0, n) {
-        if(i == piv) continue;
-        pts[cnt] = npts[i];
-        pts[cnt++].m = 1.0 * (npts[i].y - yz) / 1.0 * (npts[i].x - x0);
-    }
-    sort(pts, pts+cnt);
-    bsum = fsum = 0;
-
-    double mpre = pts[0].m;
-    c.wb = c.wt = c.w = c.acnt = c.bcnt = 0;
-    inc(pts[0]);
-    fori(i, 1, cnt) {
-        if (fabs(pts[i].m - mpre) < 1e-9) {
-            inc(pts[i]);
-        } else {
-            vpt.pb(c);
-            c.wb = c.wt = c.w = c.acnt = c.bcnt = 0;
-            inc(pts[i]);
-        }
-        mpre = pts[i].m;
-    }
-    vpt.pb(c);
-}
-
-int main() {
-    scanf("%d", &n);
-    int sum = 0;
-    fori(i, 0, n) {
-        scanf("%d %d %d", &npts[i].x, &npts[i].y, &npts[i].w);
-        sum += npts[i].w;
-    }
-    int ans = -40000000;
-    fori(piv, 0, n) {
-        getslope(piv);
-        int w0 = npts[piv].w;
-        int bst = 0;
-        for (spt p : vpt) {
-            fsum -= p.wt;
-            fsum += p.wb;
-            bst = max(bsum, fsum);
-            printf("%d %d %d %d\n", bst, bsum, fsum, p.w);
-            if (p.acnt == 0 || p.bcnt == 0) {
-                ans = max(ans, max(bst, bst + max(p.w, p.w + w0)));
-            } else {
-                ans = max(ans, max(bst, bst + p.w + w0));
-                ans = max(ans, bst + max(max(p.wb, p.wt), max(p.wb, p.wt) + w0));
-            }
-            bsum += p.wt;
-            bsum -= p.wb;
-        }
-        cout << endl;
-    }
-    printf("%d\n", ans);
-    return 0;
-}

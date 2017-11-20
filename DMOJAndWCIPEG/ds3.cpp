@@ -53,16 +53,12 @@ void build(int l, int r, int idx = 1){
 }
 
 void upd(int p, int val, int idx = 1){
+	if(tree[idx].l > p || tree[idx].r < p) return;
 	if(tree[idx].l == tree[idx].r){
 		apply(idx, val);
 		return;
 	} 
-
-	if(tree[idx].l <= p && p <= mid(tree[idx].l, tree[idx].r)) {
-		upd(p, val, left(idx));
-	}else {
-		upd(p, val, right(idx));
-	}
+	upd(p, val, left(idx)), upd(p, val, right(idx));
 	calc(idx);
 }
 
