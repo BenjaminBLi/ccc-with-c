@@ -1,66 +1,91 @@
-#include "bits/stdc++.h"
-#define ll long long
+#include <bits/stdc++.h>
+#define fori(i, st, en) for(int i = st; i < (int) en; i++)
+#define rfori(i, st, en) for(int i = st; i >= (int) en; i--)
+#define f first
+#define s second
+#define pb push_back
+#define left(i) (i<<1)
+#define right(i) (i<<1|1)
+#define mid(l, r) ((l+r)>>1)
 using namespace std;
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int, int> ii;
+typedef long long ll;
+typedef vector<ii> vii;
 
-int N;
-ll tree[400010][3], arr[100010];
+const int MAXN = 100001;
 
-//0 = left, 1 = mid, 2 = right
+struct node{
+	int l, r;
+	ll sum;
+	ll mxl, mxr, mxc;
+	node(){sum = mxl = mxr = mxc = 0;}
+}tree[MAXN<<2];
 
-void build(int cIdx, int l, int r){
-    if(l == r) {
-        tree[cIdx][0] = tree[cIdx][1] = tree[cIdx][2] = arr[l];
-        return;
-    }
-    int mid = (l+r)>>1;
-    int lIdx = cIdx<<1;
-    int rIdx = (cIdx<<1)+1;
+int n, q;
+ll orig[MAXN];
 
-    build(lIdx, l, mid);
-    build(rIdx, mid+1, r);
-
-    if(tree[lIdx][2] >= 0) {
-        tree[cIdx][1] += tree[lIdx][2];
-        tree[cIdx][2] += tree[lIdx][2];
-    }if(tree[rIdx][0] >= 0){
-        tree[cIdx][0] += tree[rIdx][0];
-        tree[cIdx][1] += tree[rIdx][0];
-    }
+inline node calc(int idx, node &a, node &b){
+	node ret = tree[idx];
+	ret.sum = a.sum + b.sum;
+	ret.mxc = max(ret.sum, max(a.mxc, b.mxc));
+	ret.mxl = max(a.mxl, a.sum + b.mxl);
+	ret.mxr = max(a.mxr + b.sum, b.mxr);
+	ret.mxc = max(max(ret.mxc, a.mxr + b.mxl), max(ret.mxl, ret.mxr));
+	return ret;
 }
 
-void update(int vIdx, int st, int en, int idx, int val) {
-    if (st == en) {
-        tree[vIdx][0] = tree[vIdx][1] = tree[vIdx][2] = val;
-        return;
-    }
-
-    int mid = (st + en) >> 1;
-    if (idx <= mid)
-        update(vIdx << 1, st, mid, idx, val);
-    else
-        update((vIdx << 1) + 1, mid + 1, en, idx, val);
-
-    tree[vIdx][1] = tree[vIdx<<1][2] + tree[(vIdx<<1)+1][0];
+inline void apply(int idx, ll val){
+	tree[idx].sum = tree[idx].mxl = tree[idx].mxr = tree[idx].mxc = val;
 }
 
-ll query(int vIdx, int st, int en, int l, int r){
-    if(st > r || en < l) return 0;
+void build(int l, int r, int idx = 1){
+	tree[idx].l = l, tree[idx].r = r;
+	if(l == r){
+		apply(idx, orig[l]);
+		return;
+	}
+	build(l, mid(l, r), left(idx)), build(mid(l, r)+1, r, right(idx));
+	tree[idx] = calc(idx, tree[left(idx)], tree[right(idx)]);
+}
 
-    if(st >= l && en <= r){
-        return tree[vIdx][1];
-    }
-    int mid = (st+en)>>1;
-    ll p1 = query(vIdx<<1, st, mid, l, r);
-    ll p2 = query((vIdx<<1)+1, mid+1, en, l, r);
+void upd(int p, ll val, int idx = 1){
+	if(tree[idx].l > p || tree[idx].r < p) return;
+	if(tree[idx].l == tree[idx].r){
+		apply(idx, val);
+		return;
+	}
+	upd(p, val, left(idx)), upd(p, val, right(idx));
+	tree[idx] = calc(idx, tree[left(idx)], tree[right(idx)]);
+}
 
-    return p1+p2;
-
+node qry(int l, int r, int idx = 1){
+	node ans, nl, nr;
+	if(tree[idx].l > r || tree[idx].r < l) {
+		ans.sum = ans.mxl = ans.mxr = ans.mxc = -10000000001LL;
+		return ans;
+	}
+	if(l <= tree[idx].l && tree[idx].r <= r) {
+		return tree[idx];
+	}
+	nl = qry(l, r, left(idx)), nr = qry(l, r, right(idx));
+	ans = calc(idx, nl, nr);
+	return ans;
 }
 
 int main(){
-    int Q;
-    scanf("%d %d", &N, &Q);
-    for(int i = 1; i <= N; i++) scanf("%lld", arr+i);
-    return 0;
+	scanf("%d%d", &n, &q);
+	fori(i, 1, n+1) scanf("%lld", orig+i);
+	build(1, n);
+	
+	char ch;
+	int a, b;
+	for(;q--;){
+		scanf(" %c%d%d", &ch, &a, &b);
+		if(ch == 'S') upd(a, b);
+		else printf("%lld\n", qry(a, b).mxc);
+	}
+	return 0;
 }
 
