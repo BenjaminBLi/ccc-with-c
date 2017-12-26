@@ -37,7 +37,7 @@ int main(){
 		d *= a[i];
 	}
 	fori(i, 0, en){
-		printf("%lld\n", memo[i][1 - c] - init[i]);
+		printf("%lld\n", memo[i][n&1] - init[i]);
 	}
 	return 0;
 }
