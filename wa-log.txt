@@ -1,0 +1,6 @@
+915C - program was too greedy: always took the equal, though it might be invalid
+915B - poor implementation of accurate idea.
+915E - didn't coordinate compress.
+1409 - didn't find mid point between a and b
+fhc15c1p2 - Coded trie wrong.
+fhc15c1p2 - didn't free memory for trie properly.
