@@ -4,3 +4,7 @@
 1409 - didn't find mid point between a and b
 fhc15c1p2 - Coded trie wrong.
 fhc15c1p2 - didn't free memory for trie properly.
+1820 - Correct solution, incorrect math implementation - multiplying by two after dividing by k, not before. Results in truncation and thus WA
+2066 - didn't consider any cases where a = 0 and b = 0 or anything that would make b*c = 0 
+1910 - wrote the bounds wrong in my for loop
+1910 - all 3 of the numbers in the interval don't need to be equal

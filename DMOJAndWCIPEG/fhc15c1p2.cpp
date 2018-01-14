@@ -22,7 +22,8 @@ string strs[MAXN];
 struct node{
   node *nxt[26];
   node(){fori(i, 0, 26) nxt[i] = NULL;}
-}*root = new node();
+};
+node *root = new node();
 
 void reset(node* &c){
   fori(i, 0, 26) if(c->nxt[i]) reset(c->nxt[i]);
