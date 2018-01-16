@@ -18,3 +18,8 @@ ccc03s4 - tle due to bad implementation + mle due to bad memory freeing between 
 1263 - forgot `%` symbol
 1100 - misread problem statement in terms of sorting
 1100 - there is a difference between std::stable_sort and std::sort
+1243 - misinterpreted problem, led to confusion with the modulus while calculating
+1493 - forgot to comment out debug statements
+1493 - didn't read statement properly - check for a guaranteed statement and not the actual answer
+1110 - didn't read about the print -1.
+1349 - forgot to get input
