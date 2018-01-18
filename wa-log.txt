@@ -23,3 +23,9 @@ ccc03s4 - tle due to bad implementation + mle due to bad memory freeing between 
 1493 - didn't read statement properly - check for a guaranteed statement and not the actual answer
 1110 - didn't read about the print -1.
 1349 - forgot to get input
+1607 - didn't properly handle two cases: would print wa if while loop doesn't calculate anything (4 3 6 1)
+1636 - misread problem statement - didn't realize it was to check t1 vs t2 - penalty
+1837 - didn't consider the case where Isenbaev wasn't present in input
+1083 - assumed long longs weren't necessary + old code was needlessly complicated due to misunderstanding the formula
+1654 - misread problem - stimulated too many steps
+1654 - used inneficient way to print answer
