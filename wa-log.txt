@@ -29,3 +29,7 @@ ccc03s4 - tle due to bad implementation + mle due to bad memory freeing between 
 1083 - assumed long longs weren't necessary + old code was needlessly complicated due to misunderstanding the formula
 1654 - misread problem - stimulated too many steps
 1654 - used inneficient way to print answer
+1723 - printed wrong substring: only needed to print one character, any longer isn't guaranteed to be AC using my algo
+2056 - didn't read the first part of the problem statement, missed a key rule
+2002 - wrong placement of if statement, led to incorrect ouptut if during login, the name exists and was already logged in, but password was wrong
+2035 - successive optimizations due to not knowing how bounds work.
