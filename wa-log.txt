@@ -33,3 +33,15 @@ ccc03s4 - tle due to bad implementation + mle due to bad memory freeing between 
 2056 - didn't read the first part of the problem statement, missed a key rule
 2002 - wrong placement of if statement, led to incorrect ouptut if during login, the name exists and was already logged in, but password was wrong
 2035 - successive optimizations due to not knowing how bounds work.
+1502 - used ints instead of long longs
+1131 - didn't consider that n included the computer with the program on it.
+1119 - didn't copy the first line of code.
+2068 - copied the output words wrong.
+2011 - greedy was incorrect - switched to a brute force.
+1290 - formula was correct, but inaccurately implemented. multiple times.
+1146 - was looping [0, n] instead of [l, n] in 2nd loop
+1370 - printed all digits instead of n
+1370 - rotate does weird stuff with memory, switched to for loop
+1644 - didn't read problem statement closely. + was too lazy to test new code
+1118 - proper divisor calculator was wrong and was too lazy to fix it.
+1214 - wrote wrong condition, then tried to cheese.
