@@ -45,3 +45,22 @@ ccc03s4 - tle due to bad implementation + mle due to bad memory freeing between 
 1644 - didn't read problem statement closely. + was too lazy to test new code
 1118 - proper divisor calculator was wrong and was too lazy to fix it.
 1214 - wrote wrong condition, then tried to cheese.
+1125 - bad bounds on a, used m instead of n
+1126 - overcomplicated the problem, then implemented poorly multiple times
+1226 - didn't print newlines.
+1711 - first tried a naive greedy that would occasionally not find the answer, then implemented poorly
+1336 - took me two submissions to realize I was printing wrong.
+2102 - missed edge case where n is prime, then program was too slow
+1688 - didn't read clearly: asked for > not >=
+1402 - used wrong data type, needed long doubles instead of an integer type...
+1982 - first tried a wrong naive algo, misread problem statement, then didn't use long long and/or init the dsu properly
+1788 - n != m, was sorting by wrong size.
+1167 - didn't handle bounds properly.
+1931 - first had wrong order of numbers - didn't consider resetting people properly, and would also print wa if the first person was the best
+1576 - didn't read a detail, then missed the word equal to 
+1142 - n = 10 was wrong for some reason
+1572 - max size of triangle is n, not n*sqrt(3)/2
+1821 - misinterepreted question, then had wrong bound loops when checking for leaders, and then needed ll rather than ints
+1709 - needed ll instead of int.
+1017 - forgot to take off extra counted block
+1135 - io was too optimized. trailing spaces existed where none should've
