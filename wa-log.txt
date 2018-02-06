@@ -64,3 +64,9 @@ ccc03s4 - tle due to bad implementation + mle due to bad memory freeing between 
 1709 - needed ll instead of int.
 1017 - forgot to take off extra counted block
 1135 - io was too optimized. trailing spaces existed where none should've
+1685 - went from [1, n] instead of [0, n-1]
+1423 - wrong bounds on string, led to infinite loop
+1352 - didn't create array properly.
+waterloow2017b - started array from 1 instead of 0, didn't consider ordering of letters, also didn't limit characters by pos.
+nccc2j3s1 - didn't use long long??
+nccc2s5 - not optimized code, didn't do mst properly, didn't optimize code, etc. use inefficient array access methods.
