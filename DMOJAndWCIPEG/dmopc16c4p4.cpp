@@ -1,45 +1,75 @@
 #include <bits/stdc++.h>
+#define fori(i, st, en) for(int i = st; i < (int) (en); i++)
+#define rfori(i, st, en) for(int i = st; i >= (int) (en); i--)
+#define f first
+#define s second
+#define pb push_back
+#define left(i) (i<<1)
+#define right(i) (i<<1|1)
+#define mid(l, r) ((l+r)>>1)
 using namespace std;
+typedef long long ll;
 typedef vector<int> vi;
-class FT{
-private:
-    vi ft;
-public:
-    FT(int n) {
-        ft.assign(n + 1, 0);
-    }
-    int rsq(int b) {
-        int sum = 0;
-        for (; b; b -= (b&(-b)))
-            sum += ft[b];
-        return sum;
-    }
-    int rsq(int a, int b) {
-        return rsq(b) - (a == 1 ? 0 : rsq(a - 1));
-    }
+typedef pair<int, int> ii;
+typedef long long ll;
+typedef vector<ii> vii;
+typedef double lf;
 
-    void adjust(int k, int v) {
-        for (; k < (int) ft.size(); k += (k&(-k))) {
-            ft[k] += v;
-        }
+const int MAXN = 100010, rt = 320;
+struct qry{
+    int l, r, id;
+    qry(){l = r = id = 0;}
+    bool operator < (const qry &o){
+        if(l/rt != o.l/rt) return l/rt < o.l/rt;
+        if(r != o.r) return r < o.r;
+        return id < o.id;
     }
-};
+}qs[MAXN];
 
-int N, Q, l, r;
+int n, a[MAXN], q, ans[MAXN], freq[MAXN], cl, cr, cnt;
+
+inline bool valid(int i){return freq[a[i]]>0 && !(freq[a[i]]&1);}
+
+inline void add(int i){
+    bool ok = valid(i);
+    freq[a[i]]++;
+    if(!ok && valid(i)) cnt++;
+    else if(ok && !valid(i)) cnt--;
+}
+
+inline void rem(int i){
+    bool ok = valid(i);
+    freq[a[i]]--;
+    if(ok && !valid(i)) cnt--;
+    else if(!ok && valid(i)) cnt++;
+}
 
 int main(){
-	scanf("%d", &N);
-	FT bit(N);
-	for(int i = 0; i < N; i++){
-		scanf("%d", &l);
-		if(l%2 == 0){
-			bit.adjust(i+1, 1);
-		}
-	}
-	scanf("%d", &Q);
-	for(int i =0; i < Q; i++){
-		scanf("%d %d", &l, &r);
-		printf("%d\n", bit.rsq(l, r));
-	}
-	return 0;
+    scanf("%d", &n);
+    fori(i, 1, n+1) scanf("%d", a+i);
+    scanf("%d", &q);
+    fori(i, 0, q){
+        scanf("%d%d", &qs[i].l, &qs[i].r);
+        qs[i].id = i;
+    }
+    sort(qs, qs+q);
+
+    cl = 1, cr = 1, cnt = 0;
+    fori(i, 0, q){
+        //printf("[%d, %d], previous: %d\n", qs[i].l, qs[i].r, cnt);
+        while(cl < qs[i].l) rem(cl++);
+        while(cl > qs[i].l) add(--cl);
+        while(cr <= qs[i].r) add(cr++);
+        while(cr > qs[i].r+1) rem(--cr);
+        
+        //printf("[%d, %d], ans: %d\n", qs[i].l, qs[i].r, cnt);
+        //fori(i, 1, n+1) printf("%d, ", freq[i]); cout << endl;
+
+        ans[qs[i].id] = cnt;
+    }
+
+    fori(i, 0, q)
+        printf("%d\n", ans[i]);
+    return 0;
 }
+

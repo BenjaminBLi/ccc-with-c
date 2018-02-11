@@ -70,3 +70,5 @@ ccc03s4 - tle due to bad implementation + mle due to bad memory freeing between 
 waterloow2017b - started array from 1 instead of 0, didn't consider ordering of letters, also didn't limit characters by pos.
 nccc2j3s1 - didn't use long long??
 nccc2s5 - not optimized code, didn't do mst properly, didn't optimize code, etc. use inefficient array access methods.
+stnbd3 - multiple WA due to forgetting that I can delete commands, and then not implementing that properly
+dmopc16c4p4 - no edge case detection on mo's interval changing, didn't ever subtract cnt, and code was very messy.
