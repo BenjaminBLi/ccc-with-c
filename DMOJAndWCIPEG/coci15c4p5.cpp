@@ -1,4 +1,18 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cstdlib>
+#include <vector>
+#include <algorithm>
+#include <queue>
+#include <map>
+#include <unordered_map>
+#include <set>
+#include <unordered_set>
+#include <stack>
+#include <deque>
+#include <cstring>
+#include <sstream>
 #define fori(i, st, en) for(int i = st; i < (int) (en); i++)
 #define rfori(i, st, en) for(int i = st; i >= (int) (en); i--)
 #define f first
@@ -15,39 +29,66 @@ typedef long long ll;
 typedef vector<ii> vii;
 typedef double lf;
 
-const int MAXN = 30;
-int n, m, rnk[MAXN];
+const int MAXN = 100010;
+int order[MAXN], a[MAXN], b[MAXN], z[MAXN], p[MAXN], n, sz[MAXN], val[MAXN];
+ll curr = 0, ans[MAXN];
+map<int, vi> tree[MAXN];
 
-bool ok[MAXN][MAXN];
+void us(int u, int v, int w) {
+    if (sz[p[u]] < sz[p[v]]) swap(u, v);
 
-bool check(int mask){
-    fori(i, 0, n) {
-        if(!(mask & (1<<i))) continue;
-        fori(j, i + 1, n) {
-            if(!(mask & (1<<j))) continue;
-            if(!ok[i][j]) return false;
+    int pu = p[u];
+    int pv = p[v];
+
+    for (auto it : tree[pv]) {
+        for (int x : it.s) {
+            curr += tree[pu][val[u] ^ w ^ val[v] ^ val[x]].size();
         }
     }
 
-    return true;
+    int prev = val[v];
+    for(auto it : tree[pv]){
+        for(auto x : it.s){
+            val[x] = val[x] ^ prev ^ w ^ val[u];
+            p[x] = pu;
+            tree[pu][val[x]].pb(x);
+        }
+    }
+
+    sz[pu] += sz[pv];
+    tree[pv].clear();
+    sz[pv] = 0;
 }
 
 int main(){
-    scanf("%d%d", &n, &m);
-    fori(i, 0, n+1) fori(j, 0, n+1) ok[i][j] = true;
-    fori(i, 0, m){
-        int u, v;
-        scanf("%d%d", &u, &v);
-        u--; v--;
-        ok[u][v] = ok[v][u] = false;
+    curr = 0;
+    scanf("%d", &n);
+    fori(i, 0, n-1) {
+        scanf("%d%d%d", a+i, b+i, z+i);
+        a[i]--, b[i]--;
     }
 
-    int cnt = 0;
-    fori(i, 0, 1<<n){
-        cnt += check(i);
+    fori(i, 0, n-1){
+        scanf("%d", order + i);
+        order[i]--;
     }
 
-    cout << cnt << endl;
+    fori(i, 0, n){
+        tree[i][0].pb(i);
+        sz[i] = 1;
+        p[i] = i;
+    }
 
+
+    rfori(i, n-2, 0){
+        us(a[order[i]], b[order[i]], z[order[i]]);
+        ans[i] = curr;
+    }
+
+    ans[n-1] = 0;
+    fori(i, 0, n){
+        printf("%lld\n", ans[i]);
+    }
     return 0;
 }
+

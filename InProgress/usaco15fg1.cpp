@@ -16,19 +16,27 @@ typedef vector<ii> vii;
 typedef double lf;
 
 const int maxn = 760, mod = 1000000007;
-int R, C, k, a[maxn][maxn], ft[maxn*maxn];
-ll memo[maxn][maxn];
-bool seen[maxn];
+int R, C, k, a[maxn][maxn], ft[maxn*maxn][maxn];
+vi cols[maxn*maxn];
 
-//fucking use a bit, ez
+void upd(int* &ft, int idx){
+    for(;idx < maxn; idx += idx & -idx) ft[idx]++;
+}
+
+
 
 int main(){
     scanf("%d%d%d", &R, &C, &k);
-    fori(i, 0, R) {
-        fori(j, 0, R) {
+    fori(i, 0, R)
+        fori(j, 0, R)
             scanf("%d", &a[i][j]);
+
+    fori(c, 0, C)
+        fori(r, 0, R){
+            int col = a[r][c];
+            if(cols[col].size() && cols[col][cols[col].size()-1] == c) continue;
+            cols[col].pb(c);
         }
-    }
 
 
     return 0;
