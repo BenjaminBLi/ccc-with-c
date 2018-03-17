@@ -1,4 +1,18 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cstdlib>
+#include <vector>
+#include <algorithm>
+#include <queue>
+#include <map>
+#include <unordered_map>
+#include <set>
+#include <unordered_set>
+#include <stack>
+#include <deque>
+#include <cstring>
+#include <sstream>
 #define fori(i, st, en) for(int i = st; i < (int) (en); i++)
 #define rfori(i, st, en) for(int i = st; i >= (int) (en); i--)
 #define f first
@@ -16,6 +30,6 @@ typedef vector<ii> vii;
 typedef double lf;
 
 int main(){
-  return 0;
+      return 0;
 }
 
